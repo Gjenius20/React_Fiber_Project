@@ -1,16 +1,24 @@
 import { Physics, useBox, usePlane } from "@react-three/cannon";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { OrbitControls, useGLTF, useHelper } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import * as THREE from "three";
+import { SpotLightHelper } from "three";
 
 useGLTF.preload("testobj.glb");
+
+function SpotLight(props) {
+  const light = useRef();
+  useHelper(light, SpotLightHelper, "cyan");
+  return <spotLight {...props} ref={light} />;
+}
 
 function Cube(props) {
   const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }));
   return (
     <mesh ref={ref}>
       <boxGeometry />
+      <meshPhongMaterial color={"blue"} />
     </mesh>
   );
 }
@@ -66,27 +74,11 @@ function PhysicsPlane(props) {
   );
 }
 
-function GravityBox(props) {
-  const [ref] = useBox(() => ({
-    mass: 10,
-    position: position,
-    args: [2, 2, 2],
-  }));
-
-  return (
-    <mesh ref={ref} castShadow>
-      <boxBufferGeometry attach="geometry" args={[2, 2, 2]} />
-      <meshStandardMaterial color="blue" />
-    </mesh>
-  );
-}
-
 const ThreeModels = () => {
   return (
-    <Canvas className="w-screen h-screen">
+    <Canvas className="w-screen h-screen invisible lg:visible">
       <ambientLight intensity={1} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
+      <SpotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       {/* <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
       <Tetra position={[1.2, 2, 0]} /> */}
