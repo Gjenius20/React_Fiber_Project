@@ -3,7 +3,7 @@ import { OrbitControls, useGLTF, useHelper } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import * as THREE from "three";
-import { SpotLightHelper } from "three";
+import { BoxHelper, SpotLightHelper } from "three";
 
 useGLTF.preload("testobj.glb");
 
@@ -15,6 +15,7 @@ function SpotLight(props) {
 
 function Cube(props) {
   const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }));
+  useHelper(ref, BoxHelper, "red");
   return (
     <mesh ref={ref}>
       <boxGeometry />
@@ -66,6 +67,8 @@ function PhysicsPlane(props) {
     rotation: [-Math.PI / 2, 0, 0],
   }));
 
+  // useHelper(ref, PlaneHelper, "blue");
+
   return (
     <mesh scale={10} ref={ref} receiveShadow>
       <planeBufferGeometry />
@@ -76,7 +79,7 @@ function PhysicsPlane(props) {
 
 const ThreeModels = () => {
   return (
-    <Canvas className="w-screen h-screen invisible lg:visible">
+    <Canvas className=" w-screen h-screen invisible lg:visible">
       <ambientLight intensity={1} />
       <SpotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       {/* <Box position={[-1.2, 0, 0]} />
