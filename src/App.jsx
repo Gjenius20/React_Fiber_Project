@@ -1,14 +1,17 @@
 import React from "react";
-import Navbar from "./Components/Navbar";
+import "./App.scss";
+import Header from "./Components/header";
 import ThreeModels from "./Components/ThreeModels";
 import "./index.css";
 
 const App = () => {
   return (
-    <header className="w-screen h-screen overflow-hidden">
-      <Navbar />
-      <ThreeModels />
-    </header>
+    <>
+      <Header />
+      <div className="container">
+        <ThreeModels />
+      </div>
+    </>
   );
 };
 

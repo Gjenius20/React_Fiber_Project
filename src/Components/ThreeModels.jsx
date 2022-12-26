@@ -16,6 +16,7 @@ function SpotLight(props) {
 function Cube(props) {
   const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }));
   useHelper(ref, BoxHelper, "red");
+  // useHelper(ref, AxesHelper(8));
   return (
     <mesh ref={ref}>
       <boxGeometry />
@@ -70,7 +71,7 @@ function PhysicsPlane(props) {
   // useHelper(ref, PlaneHelper, "blue");
 
   return (
-    <mesh scale={10} ref={ref} receiveShadow>
+    <mesh scale={10} ref={ref} receiveShadow dispose={null}>
       <planeBufferGeometry />
       <meshPhongMaterial color="gray" side={THREE.DoubleSide} />
     </mesh>
@@ -91,7 +92,6 @@ const ThreeModels = () => {
         <PhysicsPlane />
         <Cube />
       </Physics>
-
       <OrbitControls />
     </Canvas>
   );
