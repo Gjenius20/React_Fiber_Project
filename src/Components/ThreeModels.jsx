@@ -72,7 +72,7 @@ function PhysicsPlane(props) {
 
   return (
     <mesh scale={10} ref={ref} receiveShadow dispose={null}>
-      <planeBufferGeometry />
+      <planeGeometry />
       <meshPhongMaterial color="gray" side={THREE.DoubleSide} />
     </mesh>
   );
@@ -80,7 +80,7 @@ function PhysicsPlane(props) {
 
 const ThreeModels = () => {
   return (
-    <Canvas className=" w-screen h-screen invisible lg:visible">
+    <Canvas className="w-screen h-screen invisible lg:visible">
       <ambientLight intensity={1} />
       <SpotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       {/* <Box position={[-1.2, 0, 0]} />
