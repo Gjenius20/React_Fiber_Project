@@ -1,24 +1,24 @@
 export default function Navbar() {
   return (
-    <header className="absolute z-50 w-screen">
-      <div className="flex">
-        <div className="logo">CHAIR.</div>
+    <header className="navHeader">
+      <div className="main">
+        <div className="logo">CHAIR</div>
         <nav>
-          <ul>
-            <li>
-              <a href="/">discover</a>
+          <ul className="list">
+            <li className="content">
+              <a href="/" className="">
+                Abbout
+              </a>
             </li>
-            <li>
-              <a href="/">products</a>
+            <li className="content">
+              <a href="/" className="">
+                Featured
+              </a>
             </li>
-            <li>
-              <a href="/">solutions</a>
-            </li>
-            <li>
-              <a href="/">reach</a>
-            </li>
-            <li className="btn">
-              <a href="/">order</a>
+            <li className="content">
+              <a href="/" className="">
+                Contact
+              </a>
             </li>
           </ul>
         </nav>

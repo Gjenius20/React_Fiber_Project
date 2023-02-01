@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import * as THREE from "three";
 import { BoxHelper, SpotLightHelper } from "three";
 
-useGLTF.preload("testobj.glb");
+useGLTF.preload("monitor.glb");
 
 function SpotLight(props) {
   const light = useRef();
@@ -41,20 +41,17 @@ function Tetra(props) {
 
 function GltfModels(props) {
   const ref = useRef();
-  const { nodes, materials } = useGLTF("./testobj.glb");
+  const { nodes, materials } = useGLTF("./monitor.glb");
   return (
-    <group ref={ref} {...props} dispose={null}>
+    <group {...props} dispose={null}>
       <mesh
-        geometry={nodes.Plane.geometry}
-        material={materials["Material.001"]}
-        scale={5}
-      />
-      <mesh
-        geometry={nodes.Cube.geometry}
-        material={materials["Material.002"]}
-        position={[0, 1.9, 0]}
-        rotation={[1, 1, 1]}
-        scale={0.8}
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube003.geometry}
+        material={nodes.Cube003.material}
+        position={[-3.8, 0.72, 8.13]}
+        rotation={[-Math.PI, 0, -0.19]}
+        scale={[-0.03, -0.42, -0.72]}
       />
     </group>
   );
@@ -80,14 +77,14 @@ function PhysicsPlane(props) {
 
 const ThreeModels = () => {
   return (
-    <Canvas className="w-screen h-screen invisible lg:visible">
+    <Canvas className="three3d">
       <ambientLight intensity={1} />
       <SpotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       {/* <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
       <Tetra position={[1.2, 2, 0]} /> */}
 
-      {/* <GltfModels /> */}
+      <GltfModels />
       <Physics>
         <PhysicsPlane />
         <Cube />

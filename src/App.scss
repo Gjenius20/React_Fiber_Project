@@ -1,0 +1,30 @@
+.canvas {
+  width: 100vw;
+  height: 100vh;
+}
+
+.three3d {
+  width: 100vw;
+  height: 100vh;
+}
+
+// Navbar
+.navHeader {
+  position: absolute;
+  z-index: 50;
+  width: 100vw;
+}
+.navHeader .logo {
+}
+.navHeader .main {
+  display: flex;
+  justify-content: space-between;
+}
+.navHeader .list {
+  display: flex;
+  justify-content: space-between;
+}
+.navHeader .list .content {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
