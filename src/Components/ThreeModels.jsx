@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import * as THREE from "three";
 import { BoxHelper, SpotLightHelper } from "three";
 
-useGLTF.preload("monitor.glb");
+useGLTF.preload("untitled.glb");
 
 function SpotLight(props) {
   const light = useRef();
@@ -40,19 +40,55 @@ function Tetra(props) {
 }
 
 function GltfModels(props) {
-  const ref = useRef();
-  const { nodes, materials } = useGLTF("./monitor.glb");
+  // const ref = useRef();
+  const { nodes, materials } = useGLTF("./untitled.glb");
+  const [ref] = useBox(() => ({
+    mass: 1,
+    position: [0, 10, 0],
+    rotation: [0, 0, 0],
+    ...props,
+  }));
+  useHelper(ref, BoxHelper, "red");
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Cube003.geometry}
-        material={nodes.Cube003.material}
-        position={[-3.8, 0.72, 8.13]}
-        rotation={[-Math.PI, 0, -0.19]}
-        scale={[-0.03, -0.42, -0.72]}
-      />
+    <group ref={ref} {...props} dispose={null}>
+      <group position={[0.5, 0.5, 0.5]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001.geometry}
+          material={materials["Material.001"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001_1.geometry}
+          material={materials["Material.002"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001_2.geometry}
+          material={materials["Material.003"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001_3.geometry}
+          material={materials["Material.004"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001_4.geometry}
+          material={materials["Material.005"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube001_5.geometry}
+          material={materials["Material.006"]}
+        />
+      </group>
     </group>
   );
 }
@@ -63,12 +99,13 @@ function PhysicsPlane(props) {
     position: [0, 0, 0],
     type: "Static",
     rotation: [-Math.PI / 2, 0, 0],
+    scale: [10],
   }));
 
   // useHelper(ref, PlaneHelper, "blue");
 
   return (
-    <mesh scale={10} ref={ref} receiveShadow dispose={null}>
+    <mesh scale={50} ref={ref} receiveShadow dispose={null}>
       <planeGeometry />
       <meshPhongMaterial color="gray" side={THREE.DoubleSide} />
     </mesh>
@@ -84,10 +121,12 @@ const ThreeModels = () => {
       <Box position={[1.2, 0, 0]} />
       <Tetra position={[1.2, 2, 0]} /> */}
 
-      <GltfModels />
       <Physics>
+        <GltfModels position={[0, 10, 0]} />
+        <GltfModels position={[0, 1, 0]} />
+        <GltfModels position={[0, 11, 0]} />
         <PhysicsPlane />
-        <Cube />
+        {/* <Cube /> */}
       </Physics>
       <OrbitControls />
     </Canvas>
